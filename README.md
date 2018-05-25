@@ -1,9 +1,9 @@
-#Feed Reader Testing Project
+# Feed Reader Testing Project
 
 A Udacity FEND project
 Testing the Feed Reader app using framework **Jasmine**.
 
-###How To run this test
+### How To run this test
 - You can visit [this]() site.
 
 OR
