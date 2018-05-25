@@ -1,10 +1,10 @@
-#Feed Reader Testing Project
+# Feed Reader Testing Project
 
 A Udacity FEND project
 Testing the Feed Reader app using framework **Jasmine**.
 
-###How To run this test
-- You can visit [this]() site.
+### How To run this test
+- You can visit [this](https://karoldawidziuk.github.io/FeedReaderUdacity/) site.
 
 OR
  - Click "Clone in Desktop"
