@@ -71,41 +71,57 @@ $(function() {
 
 
     //Initial Entires Testing
-    describe('Initial Entires', function() {
+    describe("Initial Entries", function() {
 
-        //Avoid duplicated setup
+        // Avoid duplicated setup
+        // Before loading feed
         beforeEach(function(done) {
-            loadFeed(0, done);
+            loadFeed(0, function() {
+                done();
+            });
         });
 
-        //should at least 1 .entry element in the /feed container
-        it('there is at least a single .entry element within the .feed container', function() {
-            expect($('.feed .entry').length).toBeGreaterThan(0);
+        // Load "loadFeed" function is called and completes it, and there
+        // should at least 1 .entry element in the .feed contianer
+        it("has at least 1 entry after loadFeed function is called", function(done) {
+            var numEntries = document.querySelector(".feed").getElementsByClassName("entry").length;
+            expect(numEntries).toBeGreaterThan(0);
+            done();
+        });
+
+        // Make sure each (.feed .entry-link) element has valid link
+        it("has a entry that has a link starting with 'http(s)://'", function(done) {
+            var entries = document.querySelector(".feed").getElementsByClassName("entry-link");
+            for (var i = 0; i < entries.length; i++) {
+                expect(entries[i].href).toMatch(/^(http|https):\/\//);
+            }
+            done();
         });
     });
 
 
-
     //New Feed Selection Testing 
-    describe('New Feed Selection', function() {
-        var defaultContent;
-        var updatedContent;
+    describe("New Feed Selection", function() {
 
-        //Avoid duplicated setup
+        // Avoid duplicated setup
+        // Initial loaded feed setup
+        var initFeedSelection;
         beforeEach(function(done) {
             loadFeed(0, function() {
-                defaultContent = $('.feed').text();
+                initFeedSelection = document.querySelector(".feed").innerHTML;
 
                 loadFeed(1, function() {
-                    updatedContent = $('.feed').text();
                     done();
                 });
             });
         });
 
-        //When new feed is loaded using loadFeed function the content changes
-        it('loads a new feed', function() {
-            expect(updatedContent).not.toBe(defaultContent);
+        // Make sure when new feed is loaded using loadFeed function,
+        // the content changes
+        it("changes its loaded content", function(done) {
+            var newFeedSelection = document.querySelector(".feed").innerHTML;
+            expect(initFeedSelection).not.toBe(newFeedSelection);
+            done();
         });
     });
 }());
