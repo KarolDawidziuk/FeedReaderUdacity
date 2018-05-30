@@ -47,27 +47,21 @@ $(function() {
 
 
     //The menu testing
-    describe('The menu', function() {
+      describe('The menu', function() {
 
-        // Pre-define elements needed for testing hiding/showing of the menu
-        var body = document.body;
-        var menuIcon = document.querySelector('.menu-icon-link');
-
-        //menu is hidden initially
-        it('body has menu-hidden initially', function() {
-            expect(body.className).toContain('menu-hidden');
+        it('is hidden', function() {
+            expect($('body').hasClass('menu-hidden')).toBe(true);
         });
 
-        //menu icon toggles hide/show on clicking
-        it('body toggles the class menu-hidden on clicking menu icon', function() {
-            menuIcon.click();
-            expect(body.className).not.toContain('menu-hidden');
-
-            menuIcon.click();
-            expect(body.className).toContain('menu-hidden');
+        it('toggles visibility on click', function() {
+            // show menu
+            $('a.menu-icon-link').trigger('click');
+            expect($('body').hasClass('menu-hidden')).toBe(false);
+            // hide menu 
+            $('a.menu-icon-link').trigger('click');
+            expect($('body').hasClass('menu-hidden')).toBe(true);
         });
     });
-
 
 
     //Initial Entires Testing
